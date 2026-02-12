@@ -10,7 +10,8 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:5000"
+        url: "https://task-manager-backend-1-q9j3.onrender.com",
+        description: "Production server"
       }
     ],
     components: {
@@ -28,3 +29,4 @@ const options = {
 };
 
 module.exports = swaggerJsdoc(options);
+
