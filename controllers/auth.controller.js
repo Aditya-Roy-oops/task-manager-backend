@@ -11,15 +11,16 @@ exports.requestOTP = async (req, res, next) => {
     const otp = await createOTP(email);
     await sendOTP(email, otp);
 
-    if (process.env.NODE_ENV !== "production") {
-      return res.json({ message: "OTP generated (dev mode)", otp });
-    }
+    return res.json({
+      message: "OTP generated",
+      otp
+    });
 
-    res.json({ message: "OTP sent to email" });
   } catch (err) {
     next(err);
   }
 };
+
 
 
 exports.verifyOTP = async (req, res, next) => {
@@ -49,3 +50,4 @@ exports.verifyOTP = async (req, res, next) => {
     next(err);
   }
 };
+
