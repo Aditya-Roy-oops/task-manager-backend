@@ -10,10 +10,9 @@ module.exports = (req, res, next) => {
     }
 
     const token = header.split(" ")[1];
-
     const decoded = jwt.verify(token, config.accessSecret);
 
-    // Important fix
+    // critical fix
     req.user = { id: decoded.id };
 
     next();
