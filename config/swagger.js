@@ -6,27 +6,27 @@ const options = {
     info: {
       title: "Task Manager API",
       version: "1.0.0",
-      description: "Backend Assignment API Documentation"
+      description: "Backend Assignment API Documentation",
     },
     servers: [
       {
         url: "https://task-manager-backend-1-q9j3.onrender.com",
-        description: "Production server"
-      }
+      },
     ],
+
     components: {
       securitySchemes: {
         bearerAuth: {
           type: "http",
           scheme: "bearer",
-          bearerFormat: "JWT"
-        }
-      }
+          bearerFormat: "JWT",
+          in: "header",
+          name: "Authorization"
+        },
+      },
     },
-    security: [{ bearerAuth: [] }]
   },
-  apis: ["./routes/*.js"]
+  apis: ["./routes/*.js"],
 };
 
 module.exports = swaggerJsdoc(options);
-
