@@ -9,6 +9,10 @@ const {apiLimiter} = require("./middleware/rateLimiter");
 const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Expose-Headers", "Authorization");
+  next();
+});
 
 app.use(cors());
 app.use(express.json());
@@ -23,3 +27,4 @@ app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(errorHandler);
 
 module.exports = app;
+
