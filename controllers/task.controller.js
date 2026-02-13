@@ -30,7 +30,7 @@ exports.createTask = async (req, res, next) => {
 exports.getTasks = async (req, res, next) => {
   try {
     const userId = getUserId(req);
-    const [rows] = await taskModel.findAllByUser(userId);
+    const rows = await taskModel.findAllByUser(userId);
 
     res.json(rows);
   } catch (err) {
@@ -66,3 +66,4 @@ exports.deleteTask = async (req, res, next) => {
     next(err);
   }
 };
+
