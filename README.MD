@@ -134,13 +134,13 @@ Click the **Authorize 🔒 button** (top right)
 Paste:
 
 ```
-Bearer <accessToken>
+<accessToken>
 ```
 
 Example:
 
 ```
-Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
 Click **Authorize → Close**
