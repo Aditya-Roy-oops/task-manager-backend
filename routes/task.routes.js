@@ -9,10 +9,12 @@ router.use(auth);
  * @swagger
  * /tasks:
  *   get:
- *     summary: Get user tasks
- *     tags: [Tasks]
+ *     summary: Get all user tasks
  *     security:
  *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: List of tasks
  */
 router.get("/", ctrl.getTasks);
 
@@ -21,8 +23,7 @@ router.get("/", ctrl.getTasks);
  * @swagger
  * /tasks:
  *   post:
- *     summary: Create task
- *     tags: [Tasks]
+ *     summary: Create a new task
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -31,18 +32,17 @@ router.get("/", ctrl.getTasks);
  *         application/json:
  *           schema:
  *             type: object
- *             required:
- *               - title
+ *             required: [title]
  *             properties:
  *               title:
  *                 type: string
- *                 example: Learn Backend
  *               description:
  *                 type: string
- *                 example: Practice assignment
  *               status:
  *                 type: string
- *                 example: pending
+ *     responses:
+ *       200:
+ *         description: Task created
  */
 router.post("/", validateTask, ctrl.createTask);
 
@@ -52,28 +52,8 @@ router.post("/", validateTask, ctrl.createTask);
  * /tasks/{id}:
  *   put:
  *     summary: Update task
- *     tags: [Tasks]
  *     security:
  *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               title:
- *                 type: string
- *               description:
- *                 type: string
- *               status:
- *                 type: string
  */
 router.put("/:id", validateTask, ctrl.updateTask);
 
@@ -83,16 +63,11 @@ router.put("/:id", validateTask, ctrl.updateTask);
  * /tasks/{id}:
  *   delete:
  *     summary: Delete task
- *     tags: [Tasks]
  *     security:
  *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
  */
+
 router.delete("/:id", ctrl.deleteTask);
 
 module.exports = router;
+
