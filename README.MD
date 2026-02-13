@@ -2,11 +2,11 @@
 
 ## Hosted URL
 
-https://task-manager-backend-ipqs.onrender.com/
+https://task-manager-backend-1-q9j3.onrender.com/
 
 ## Swagger Docs
 
-https://task-manager-backend-ipqs.onrender.com//docs
+https://task-manager-backend-1-q9j3.onrender.com/docs
 
 ---
 
