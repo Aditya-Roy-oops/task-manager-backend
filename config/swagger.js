@@ -8,9 +8,10 @@ const options = {
       version: "1.0.0",
       description: "Backend Assignment API Documentation",
     },
+
     servers: [
       {
-        url: "https://task-manager-backend-1-q9j3.onrender.com",
+        url: "/",   // IMPORTANT → makes swagger work on any deployment
       },
     ],
 
@@ -20,12 +21,17 @@ const options = {
           type: "http",
           scheme: "bearer",
           bearerFormat: "JWT",
-          in: "header",
-          name: "Authorization"
         },
       },
     },
+
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
   },
+
   apis: ["./routes/*.js"],
 };
 
