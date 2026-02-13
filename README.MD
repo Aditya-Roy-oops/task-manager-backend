@@ -1,92 +1,218 @@
-# Task Manager Backend – REGRIP Assignment
+# Task Manager Backend API
 
-## Hosted URL
+This project is a backend service for a simple task management system.
+Users log in using an email OTP and then can securely manage their own tasks.
 
+The focus of this assignment was clean API design, authentication flow, proper access control, logging, and documentation.
+
+---
+
+## 🌐 Live Links
+
+**Hosted API**
 https://task-manager-backend-1-q9j3.onrender.com/
 
-## Swagger Docs
-
+**Swagger Documentation**
 https://task-manager-backend-1-q9j3.onrender.com/docs
 
 ---
 
-## Tech Stack
+## 🧰 Tech Stack
 
 * Node.js
 * Express.js
-* PostgreSQL (Railway)
+* MySQL (Railway Database)
 * JWT Authentication
+* OTP Based Login (simulated)
 * Swagger API Documentation
 
 ---
 
-## Features Implemented
+## ✨ Features
 
 ### Authentication
 
-* Email based OTP login (simulated)
-* JWT access token
-* Secure protected routes
+* Email based OTP login
+* Short-lived JWT access token
+* Protected routes
+
+> For assignment testing, OTP is printed in the server console instead of sending a real email.
+
+---
 
 ### Task Management
 
-* Create Task
-* View Tasks
-* Update Task
-* Delete Task
+After authentication a user can:
 
-### Security
+* Create a task
+* View their tasks
+* Update a task
+* Delete a task
 
-* Authentication middleware
+Users cannot access tasks belonging to other users.
+
+---
+
+### Security & Middleware
+
+* JWT Authentication middleware
 * Authorization per user
 * Input validation
 * Rate limiting
-* Global error handler
+* Centralized error handler
 
-### Logging
+---
 
-System logs stored in DB:
+### Activity Logging
+
+The system stores logs in database:
 
 * Login attempts
-* Task operations
-* API usage
+* Task creation/update/delete
+* API access events
 
 ---
 
-## Fake OTP Note
+## 🚀 How To Use (Swagger Testing Guide)
 
-For assignment testing purposes, OTP is printed in server console instead of real email delivery.
+Open Swagger:
+https://task-manager-backend-1-q9j3.onrender.com/docs
+
+Follow these steps exactly:
 
 ---
 
-## Environment Variables (.env)
+### Step 1 — Generate OTP
+
+`POST /auth/send-otp`
+
+Body:
+
+```
+{
+  "email": "test@gmail.com"
+}
+```
+
+Check server logs (Render logs) → you will see:
+
+```
+OTP FOR TESTING: 123456
+```
+
+---
+
+### Step 2 — Verify OTP
+
+`POST /auth/verify-otp`
+
+Body:
+
+```
+{
+  "email": "test@gmail.com",
+  "otp": "123456"
+}
+```
+
+Response:
+
+```
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+Copy the **accessToken**
+
+---
+
+### Step 3 — Authorize Swagger
+
+Click the **Authorize 🔒 button** (top right)
+
+Paste:
+
+```
+Bearer <accessToken>
+```
+
+Example:
+
+```
+Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+```
+
+Click **Authorize → Close**
+
+Now all protected routes will work.
+
+---
+
+### Step 4 — Create Task
+
+`POST /tasks`
+
+```
+{
+  "title": "My first task",
+  "description": "Testing API",
+  "status": "pending"
+}
+```
+
+---
+
+### Step 5 — Get Tasks
+
+`GET /tasks`
+
+You will receive your tasks list.
+
+---
+
+### Step 6 — Update Task
+
+`PUT /tasks/{id}`
+
+---
+
+### Step 7 — Delete Task
+
+`DELETE /tasks/{id}`
+
+---
+
+## 💻 Run Locally
+
+```
+git clone <repo-url>
+cd task-manager-backend
+npm install
+```
+
+Create `.env` file:
 
 ```
 PORT=5000
 
 DB_HOST=
+DB_PORT=
 DB_USER=
 DB_PASSWORD=
 DB_NAME=
-DB_PORT=
 
-ACCESS_SECRET=
-REFRESH_SECRET=
-OTP_SECRET=
+JWT_SECRET=
+JWT_REFRESH_SECRET=
 ```
 
----
-
-## Run Locally
+Start server:
 
 ```
-git clone <repo>
-cd task-manager-backend
-npm install
 npm run dev
 ```
 
-Server runs at:
+Local URLs:
 
 ```
 http://localhost:5000
@@ -95,38 +221,35 @@ http://localhost:5000/docs
 
 ---
 
-## How to Test API
+## 🗄 Database Tables
 
-1. Generate OTP
-   POST /auth/send-otp
+Automatically created:
 
-2. Check server console → copy OTP
-
-3. Verify OTP
-   POST /auth/verify-otp
-
-4. Copy access token
-
-5. Click Authorize in Swagger and paste:
-   Bearer <token>
-
-6. Now use /tasks endpoints
+* users
+* otps
+* tasks
+* logs
 
 ---
 
-## Design Decisions
+## 🧠 Design Decisions
 
-* JWT used for stateless authentication
-* OTP used instead of passwords for simplicity
-* Middleware based architecture for scalability
-* Separate controllers, services, models for clean structure
-* Global error handler to avoid repetitive try/catch
-* Swagger for clear API testing
+* OTP authentication used instead of password for simplicity
+* JWT for stateless secure sessions
+* Middleware architecture for scalability
+* Separate controllers/models/routes for clean structure
+* Logging added for audit tracking
 
 ---
 
-## Assumptions
+## 📌 Assumptions
 
-* Email sending simulated
-* Single device login sufficient
-* Basic rate limiting adequate for assignment
+* Email sending simulated through console
+* One active session per user is acceptable
+* Basic rate limiting sufficient for assignment scope
+
+---
+
+## Author
+
+Backend Assignment Submission
