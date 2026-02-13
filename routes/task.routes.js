@@ -54,6 +54,29 @@ router.post("/", validateTask, ctrl.createTask);
  *     summary: Update task
  *     security:
  *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Task ID
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *               status:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Task updated
  */
 router.put("/:id", validateTask, ctrl.updateTask);
 
@@ -65,9 +88,19 @@ router.put("/:id", validateTask, ctrl.updateTask);
  *     summary: Delete task
  *     security:
  *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Task ID
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Task deleted
  */
-
 router.delete("/:id", ctrl.deleteTask);
 
 module.exports = router;
+
 
