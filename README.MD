@@ -171,13 +171,13 @@ You will receive your tasks list.
 
 ---
 
-### Step 6 — Update Task
+### Step 6 — Update Task (with task id)
 
 `PUT /tasks/{id}`
 
 ---
 
-### Step 7 — Delete Task
+### Step 7 — Delete Task (with task id)
 
 `DELETE /tasks/{id}`
 
@@ -186,7 +186,7 @@ You will receive your tasks list.
 ## 💻 Run Locally
 
 ```
-git clone <repo-url>
+git clone https://github.com/Aditya-Roy-oops/task-manager-backend
 cd task-manager-backend
 npm install
 ```
@@ -250,6 +250,5 @@ Automatically created:
 
 ---
 
-## Author
+## Author: Aditya Sharma (Aditya-Roy-oops)
 
-Backend Assignment Submission
